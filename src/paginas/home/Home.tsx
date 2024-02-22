@@ -1,6 +1,9 @@
 import React from 'react';
 import homeLogo from '../../assets/house-icon-clipart-transparent-background-free-png.webp';
 import './Home.css';
+import ListaPostagens from '../../components/postagens/listaPostagens/listaPostagens';
+import ModalPostagem from '../../components/postagens/modalPostagem/ModalPostagem';
+
 
 
 function Home() {
@@ -24,7 +27,7 @@ function Home() {
             </div>
           </div>
         </div>
-      
+        <ListaPostagens />
       </>
     );
 }
