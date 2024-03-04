@@ -1,13 +1,14 @@
-import React from 'react';
 import './App.css';
 
-import Navbar from './components/navBar/NavBar';
-import Footer from './components/footer/Footer';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
+import { ToastContainer } from 'react-toastify';
+
 import Login from './paginas/login/Login';
 import Cadastro from './paginas/cadastro/Cadastro';
 import Home from './paginas/home/Home';
-import { AuthProvider } from './contexts/AuthContext';
+import Navbar from './components/navBar/NavBar';
+import Footer from './components/footer/Footer';
 import ListaTemas from './components/temas/listaTemas/ListaTemas';
 import FormularioTema from './components/temas/formularioTema/FormularioTema';
 import DeletarTema from './components/temas/deletarTema/DeletarTema';
@@ -16,7 +17,7 @@ import FormularioPostagem from './components/postagens/formularioPostagem/Formul
 import DeletarPostagem from './components/postagens/deletarPostagem/DeletarPostagem';
 import Perfil from './paginas/perfil/Perfil';
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer } from 'react-toastify';
+
 
 
 function App() {
