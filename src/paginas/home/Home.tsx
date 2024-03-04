@@ -1,9 +1,10 @@
 
 import homeLogo from '../../assets/cthulhu.gif';
 import './Home.css';
-import ListaPostagens from '../../components/postagens/listaPostagens/ListaPostagens';
+
 import ModalPostagem from '../../components/postagens/modalPostagem/ModalPostagem';
-import bemVindo from '../../assets/sejam-bem-vindes-02-03-2024 (1).gif';
+import bemVindo from '../../assets/sejam-bem-vindes-02-03-2024.gif';
+import ListaPostagens from '../../components/postagens/listaPostagens/ListaPostagens';
 
 
 function Home() {
