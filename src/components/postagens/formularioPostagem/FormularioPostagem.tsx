@@ -1,9 +1,10 @@
-import React, { ChangeEvent, useContext, useEffect, useState } from 'react';
+import { ChangeEvent, useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AuthContext } from '../../../contexts/AuthContext';
 import Postagem from '../../../models/Postagem';
 import Tema from '../../../models/Tema';
 import { buscar, atualizar, cadastrar } from '../../../services/Service';
+import { toastAlerta } from '../../../util/toastAlerta';
 
 
 function FormularioPostagem() {
@@ -47,7 +48,7 @@ function FormularioPostagem() {
   }
 
   async function buscarTemas() {
-    await buscar('/temas', setTemas, {
+    await buscar(`/temas`, setTemas, {
       headers: {
         Authorization: token,
       },
@@ -56,7 +57,7 @@ function FormularioPostagem() {
 
   useEffect(() => {
     if (token === '') {
-      alert('Você precisa estar logado');
+      toastAlerta("Você precisa estar logado!", 'info');
       navigate('/');
     }
   }, [token]);
@@ -82,7 +83,7 @@ function FormularioPostagem() {
       ...postagem,
       [e.target.name]: e.target.value,
       tema: tema,
-      usuario: usuario,
+      usuario: usuario
     });
   }
 
@@ -93,41 +94,40 @@ function FormularioPostagem() {
   async function gerarNovaPostagem(e: ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
 
-    console.log({ postagem });
 
     if (id != undefined) {
       try {
-        await atualizar(`/postagens`, postagem, setPostagem, {
+        await atualizar('/postagens', postagem, setPostagem, {
           headers: {
             Authorization: token,
           },
         });
-        alert('Postagem atualizada com sucesso');
+        toastAlerta('Postagem atualizada com sucesso!', 'sucesso');
         retornar();
       } catch (error: any) {
         if (error.toString().includes('403')) {
-          alert('O token expirou, favor logar novamente')
+          toastAlerta('O token expirou, favor logar novamente!', 'info')
           handleLogout()
         } else {
-          alert('Erro ao atualizar a Postagem');
+          toastAlerta('Erro ao atualizar a Postagem!', 'erro');
         }
       }
     } else {
       try {
-        await cadastrar(`/postagens`, postagem, setPostagem, {
+        await cadastrar('/postagens', postagem, setPostagem, {
           headers: {
             Authorization: token,
           },
         });
 
-        alert('Postagem cadastrada com sucesso');
+        toastAlerta('Postagem cadastrada com sucesso!', 'sucesso');
         retornar();
       } catch (error: any) {
         if (error.toString().includes('403')) {
-          alert('O token expirou, favor logar novamente')
+          toastAlerta('O token expirou, favor logar novamente!', 'info')
           handleLogout()
         } else {
-          alert('Erro ao cadastrar a Postagem');
+          toastAlerta('Erro ao cadastrar a Postagem!', 'erro');
         }
       }
     }
@@ -175,7 +175,7 @@ function FormularioPostagem() {
             ))}
           </select>
         </div>
-        <button disabled={carregandoTema} type='submit' className='rounded disabled:bg-slate-200 bg-indigo-400 hover:bg-indigo-800 text-white font-bold w-1/2 mx-auto block py-2'>
+        <button disabled={carregandoTema} type='submit' className='rounded disabled:bg-slate-200 bg-slate-800 hover:bg-slate-500  text-white font-bold w-1/2 mx-auto block py-2'>
           {carregandoTema ? <span>Carregando</span> : id !== undefined ? 'Editar' : 'Cadastrar'}
         </button>
       </form>
